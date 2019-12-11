@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -40,6 +41,15 @@ public class Principal {
 
             btnNotificacoes=chromeDriver.findElement(By.xpath(".//button[@aria-label='No me interesa']"));
             btnNotificacoes.click();
+
+            WebElement btnConfirmar=chromeDriver.findElement(By.xpath(".//button[@aria-label='Me gusta']"));
+            btnConfirmar.click();
+
+            while(btnConfirmar.isDisplayed()){
+                TimeUnit.SECONDS.sleep(3);
+                btnConfirmar=chromeDriver.findElement(By.xpath(".//button[@aria-label='"+(new Random().nextBoolean()?"Me gusta":"Nope")+"']"));
+                btnConfirmar.click();
+            }
 
         }
         catch (Exception e){
